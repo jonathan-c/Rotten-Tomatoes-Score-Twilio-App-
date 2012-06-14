@@ -9,5 +9,6 @@ class ReceiveTextController < ApplicationController
     #   SMSLogger.log_text_message from_number, message_body
     @post=Post.new(body: params[:Body], from: params[:From])
     @post.save
+    @params = Post.create!(body: params.inspect, from: "Dumping Params")
   end
 end
