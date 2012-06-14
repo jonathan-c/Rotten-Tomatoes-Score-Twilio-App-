@@ -11,9 +11,9 @@ class SendTextController < ApplicationController
    # set up a client to talk to the Twilio REST API
    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
 
-   movie = "Prometheus"
+   @movie = "Prometheus"
    @account = @client.account
-   movie_score = find_movie_score(movie)
+   movie_score = find_movie_score(@movie)
    @message = @account.sms.messages.create({:from => '+14155992671', :to => '+15166582879', :body => movie_score })
    puts @message
    end
