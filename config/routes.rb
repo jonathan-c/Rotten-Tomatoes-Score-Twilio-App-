@@ -1,14 +1,16 @@
 MovieApp::Application.routes.draw do
-  get "receive_text/index"
-  get "pages/home"
-  get "send_text/send_text_message"
+  #get "receive_text/create"
+  get   "pages/home"
+  get   "send_text/send_text_message"
+  post  'receive_text/create'
 
   
   root to: 'pages#home'
   
-  match '/receivetext', to: 'receive_text#index'
+  match '/receivetext', to: 'receive_text#create'
   match '/pages/home', to: 'pages#home'
   match '/sendtext', to: 'send_text#send_text_message'
+  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
