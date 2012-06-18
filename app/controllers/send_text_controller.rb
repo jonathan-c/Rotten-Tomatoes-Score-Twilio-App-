@@ -10,10 +10,13 @@ class SendTextController < ApplicationController
 
    # set up a client to talk to the Twilio REST API
    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
-
-   @movie = "American Pie"
+   
+   # New dynamic version
+   # Uncomment this line when testing on the local database
+   @example = Post.create(body: "American Pie", from: "+15161234567")
+   @request = Post.last.body
    @account = @client.account
-   movie_score = find_movie_score(@movie)
+   movie_score = find_movie_score(@request)
    @message = @account.sms.messages.create({:from => '+14155992671', :to => '+15166582879', :body => movie_score })
    puts @message
    end
