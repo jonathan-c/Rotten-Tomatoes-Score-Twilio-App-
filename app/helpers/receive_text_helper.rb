@@ -8,7 +8,7 @@ module ReceiveTextHelper
    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
 
    @request = Post.find(:all, :order => "created_at DESC", :limit => 1)
-   @movie = @request.body
+   @movie = "Rudy"
    @account = @client.account
    movie_score = find_movie_score(@movie)
    @message = @account.sms.messages.create({:from => '+14155992671', :to => '+15166582879', :body => movie_score })
