@@ -8,12 +8,13 @@ module ReceiveTextHelper
    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
 
    # Uncomment when testing on the local database
-   # @example = Post.create(body: "American Pie", from: "+15161234567")
+   #@example = Post.create(body: "American Pie", from: "+15166582879")
    
    @request = Post.last.body
+   @send_message_to = Post.last.from
    @account = @client.account
    movie_score = find_movie_score(@request)
-   @message = @account.sms.messages.create({:from => '+14155992671', :to => '+15166582879', :body => movie_score })
+   @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => movie_score })
    puts @message
    end
    
