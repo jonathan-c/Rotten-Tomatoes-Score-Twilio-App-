@@ -14,7 +14,7 @@ module ReceiveTextHelper
    @send_message_to = Post.last.from
    @account = @client.account
    movie_score = find_movie_score(@request)
-   @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => movie_score })
+   @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "The Rotten Tomatoes score for " + @request + "is " + movie_score })
    puts @message
    end
    
