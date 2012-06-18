@@ -8,9 +8,9 @@ module ReceiveTextHelper
    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
 
    # Uncomment when testing on the local database
-   #@example = Post.create(body: "American Pie", from: "+15166582879")
+   # @example = Post.create(body: "american pie", from: "+15166582879")
    
-   @request = Post.last.body
+   @request = Post.last.body.titleize
    @send_message_to = Post.last.from
    @account = @client.account
    movie_score = find_movie_score(@request)
