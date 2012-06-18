@@ -1,5 +1,5 @@
 MovieApp::Application.routes.draw do
-  get "receive_text/create"
+  #get "receive_text/create"
   get   "pages/home"
   get   "send_text/send_text_message"
   post  'receive_text/create'
