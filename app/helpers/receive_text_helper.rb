@@ -14,13 +14,14 @@ module ReceiveTextHelper
    @send_message_to = Post.last.from
    @account = @client.account
    movie_score = find_movie_score(@request)
-   @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "The Rotten Tomatoes score for " + '"' + return_movie_name(@request) + '"' + " is " + movie_score })
+   @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "The Rotten Tomatoes score for " + '"' + @returned_movie + '"' + " is " + movie_score })
    puts @message
    end
    
    def find_movie_score(movie)
     bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
   	 movies = bf.movies.search_by_name(movie) 
+  	 @returned_movie = movies[0].name
   	 cast = movies[0].full_cast 
   	 reviews = movies[0].reviews
   	 scores = movies[0].scores 
@@ -30,9 +31,9 @@ module ReceiveTextHelper
     #cast.methods.sort
    end
    
-   def return_movie_name(movie)
-     bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
-   	 @returned_movie = bf.movies.search_by_name(movie)
-   	 @returned_movie[0].name
- 	 end
+   # def return_movie_name(movie)
+   #   bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
+   #   @returned_movie = bf.movies.search_by_name(movie)
+   #   @returned_movie[0].name
+   #     end
 end
