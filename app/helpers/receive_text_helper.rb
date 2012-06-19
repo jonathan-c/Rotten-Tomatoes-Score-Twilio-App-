@@ -16,7 +16,7 @@ module ReceiveTextHelper
    @send_message_to = Post.last.from
    @account = @client.account
    movie_score = find_movie_score(@request)
-   if movie_score == "-1"
+   if movie_score == "1"
      @error_message = @account.sms.messages.create({:from => @sandbox_number, :to => @send_message_to, :body => "There is no Rotten Tomatoes critic score for this movie yet."  })
       puts @error_message
    else
