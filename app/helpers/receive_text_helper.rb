@@ -15,10 +15,10 @@ module ReceiveTextHelper
    @account = @client.account
    movie_score = find_movie_score(@request)
    if @returned_movie == nil
-     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "There is no Rotten Tomatoes critic score for this movie yet." })
+     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "Did you type in the name of the movie correctly? Double check." })
       puts @message
    elsif movie_score == 1%
-     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "Did you type in the name of the movie correctly? Double check."  })
+     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "There is no Rotten Tomatoes critic score for this movie yet."  })
       puts @message
    else
      @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "The Rotten Tomatoes score for "             + '"' + @returned_movie + '"' + " is " + movie_score })
