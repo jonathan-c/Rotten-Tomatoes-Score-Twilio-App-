@@ -14,8 +14,16 @@ module ReceiveTextHelper
    @send_message_to = Post.last.from
    @account = @client.account
    movie_score = find_movie_score(@request)
-   @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "The Rotten Tomatoes score for " + '"' + @returned_movie + '"' + " is " + movie_score })
-   puts @message
+   if movie_score == nil
+     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "There is no Rotten Tomatoes critic score for this movie yet." })
+      puts @message
+   elsif movie_score == 1%
+     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "Did you type in the name of the movie correctly? Double check."  })
+      puts @message
+   else
+     @message = @account.sms.messages.create({:from => '+15163368089', :to => @send_message_to, :body => "The Rotten Tomatoes score for "             + '"' + @returned_movie + '"' + " is " + movie_score })
+     puts @message
+   end
    end
    
    def find_movie_score(movie)
@@ -31,9 +39,9 @@ module ReceiveTextHelper
     #cast.methods.sort
    end
    
-   # def return_movie_name(movie)
-   #   bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
-   #   @returned_movie = bf.movies.search_by_name(movie)
-   #   @returned_movie[0].name
-   #     end
+   def return_movie(movie)
+     bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
+     @returned_movie = bf.movies.search_by_name(movie)
+     image_tag(@returned_movie[0].posters.thumbnail)
+   end
 end
