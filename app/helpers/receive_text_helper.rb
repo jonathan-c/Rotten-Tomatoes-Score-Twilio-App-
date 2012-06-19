@@ -33,7 +33,7 @@ module ReceiveTextHelper
   	 reviews = movies[0].reviews
   	 scores = movies[0].scores 
 
-  	 scores.critics_score
+  	 scores.critics_score.to_s
   	 #movies 
     #cast.methods.sort
    end
