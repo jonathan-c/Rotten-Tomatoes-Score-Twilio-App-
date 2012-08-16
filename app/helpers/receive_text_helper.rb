@@ -1,16 +1,16 @@
 module ReceiveTextHelper
   
   def send_text_message
-   @account_sid = 'AC8d291a7930f04a79ab486f95c8058a18'
-   @auth_token = '9be6999dcd821ee41a5c1eff4a8296f6'
-   @sandbox_number = '+14155992671'
-   @from_number = '+15163368089'
+   @account_sid = 'XXXXXXXXXX'
+   @auth_token = 'XXXXXXXXX'
+   @sandbox_number = '+1XXXXXXX'
+   @from_number = '+1XXXXXXX'
 
    # set up a client to talk to the Twilio REST API
    @client = Twilio::REST::Client.new(@account_sid, @auth_token)
 
    # Uncomment when testing on the local database
-   # @example = Post.create(body: "american pie", from: "+15166582879")
+   # @example = Post.create(body: "Fight Club", from: "+1XXXXXXX")
    
    @request = Post.last.body
    @send_message_to = Post.last.from
@@ -26,7 +26,7 @@ module ReceiveTextHelper
    end
    
    def find_movie_score(movie)
-    bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
+    bf = BadFruit.new("BF API KEY GOES HERE") 
   	 movies = bf.movies.search_by_name(movie) 
   	 @returned_movie = movies[0].name
   	 cast = movies[0].full_cast 
@@ -34,12 +34,11 @@ module ReceiveTextHelper
   	 scores = movies[0].scores 
 
   	 scores.critics_score.to_s
-  	 #movies 
     #cast.methods.sort
    end
    
    def return_movie_thumbnail(movie)
-     bf = BadFruit.new("c337mtn76ujsn6m6krkyrdp2") 
+     bf = BadFruit.new("BF API KEY GOES HERE") 
      @returned_movie = bf.movies.search_by_name(movie)
      image_tag(@returned_movie[0].posters.thumbnail)
    end
